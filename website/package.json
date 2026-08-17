@@ -1,0 +1,13 @@
+{
+  "name": "farmer-id-tool",
+  "version": "1.0.0",
+  "description": "Farmer ID Card Generator & Printable Tool",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["farmer", "id-card", "pvc", "generator"],
+  "author": "",
+  "license": "ISC"
+}

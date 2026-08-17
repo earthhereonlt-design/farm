@@ -1,0 +1,215 @@
+/* Product shell only. The printable card and its download/export controls remain untouched. */
+:root {
+  --paper: #f5f6f2;
+  --surface: #ffffff;
+  --surface-soft: #fafbf8;
+  --ink: #1d2920;
+  --ink-soft: #647067;
+  --line: #dce3da;
+  --line-strong: #c8d3c7;
+  --forest: #28553a;
+  --forest-deep: #1e432e;
+  --forest-soft: #edf3eb;
+  --sand: #f3f0e7;
+  --shadow: 0 18px 42px rgba(25, 43, 30, .065), 0 2px 7px rgba(25, 43, 30, .035);
+}
+
+html, body { background: var(--paper) !important; }
+body { color: var(--ink) !important; }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 65% 42% at 100% -8%, rgba(161, 184, 148, .16), transparent 68%),
+    linear-gradient(90deg, rgba(45, 74, 50, .026) 1px, transparent 1px),
+    linear-gradient(rgba(45, 74, 50, .026) 1px, transparent 1px);
+  background-size: auto, 52px 52px, 52px 52px;
+}
+
+.ambient-glow { display: none !important; }
+
+/* Top application bar */
+header.no-print {
+  background: rgba(255, 255, 255, .9) !important;
+  border-color: var(--line) !important;
+  box-shadow: 0 1px 0 rgba(30, 55, 37, .04);
+  backdrop-filter: blur(16px) saturate(130%) !important;
+}
+header.no-print > div { max-width: 1360px !important; height: 76px !important; }
+header.no-print .w-11 {
+  width: 2.45rem !important;
+  height: 2.45rem !important;
+  border-radius: 10px !important;
+  background: var(--forest) !important;
+  box-shadow: none !important;
+  font-size: 1.12rem !important;
+}
+header.no-print h1 { color: var(--ink) !important; letter-spacing: -.055em !important; }
+header.no-print h1 + span {
+  padding: .23rem .45rem !important;
+  border-radius: 4px !important;
+  background: var(--sand) !important;
+  color: #675e49 !important;
+  font-size: 8px !important;
+}
+header.no-print p { color: var(--ink-soft) !important; }
+header.no-print select, header.no-print button {
+  border-color: var(--line) !important;
+  border-radius: 7px !important;
+  background: var(--surface-soft) !important;
+  color: #435047 !important;
+  box-shadow: none !important;
+}
+header.no-print select:hover, header.no-print button:hover { background: var(--forest-soft) !important; }
+
+/* A quiet progress rail, deliberately separated from the editing surface. */
+.no-print.bg-white.border-b {
+  background: rgba(245, 246, 242, .94) !important;
+  border-color: var(--line) !important;
+  padding-top: .7rem !important;
+  padding-bottom: .7rem !important;
+}
+.no-print.bg-white.border-b > div { max-width: 1360px !important; gap: .25rem !important; }
+.no-print.bg-white.border-b > div > button {
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  min-width: 0 !important;
+  padding: .55rem .7rem !important;
+}
+.no-print.bg-white.border-b > div > button.bg-emerald-50 {
+  background: var(--surface) !important;
+  border-color: var(--line-strong) !important;
+  box-shadow: 0 1px 2px rgba(25, 43, 30, .04) !important;
+}
+.no-print.bg-white.border-b .bg-emerald-600,
+.no-print.bg-white.border-b .step-bubble.active {
+  background: var(--forest) !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+.no-print.bg-white.border-b .bg-emerald-100 { background: #e4ede3 !important; color: var(--forest) !important; border-radius: 6px !important; }
+.no-print.bg-white.border-b .text-emerald-900,
+.no-print.bg-white.border-b .text-emerald-950 { color: var(--forest-deep) !important; }
+
+/* Editing workspace */
+main.no-print {
+  max-width: 1360px !important;
+  gap: 2.25rem !important;
+  padding-top: 2.5rem !important;
+  padding-bottom: 4.5rem !important;
+}
+.premium-card:not(:has(.dl-tile)) {
+  background: var(--surface) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--shadow) !important;
+  transition: border-color .18s ease, box-shadow .18s ease !important;
+}
+.premium-card:not(:has(.dl-tile)):hover {
+  transform: none !important;
+  border-color: var(--line-strong) !important;
+  box-shadow: 0 20px 46px rgba(25, 43, 30, .075), 0 2px 7px rgba(25, 43, 30, .03) !important;
+}
+.premium-card:not(:has(.dl-tile)) h2 { color: var(--ink) !important; letter-spacing: -.045em !important; font-size: 1.36rem !important; }
+.premium-card:not(:has(.dl-tile)) h2 + p { color: var(--ink-soft) !important; }
+.premium-card:not(:has(.dl-tile)) .border-b { border-color: #e8ede7 !important; }
+
+/* Keep form controls compact, high contrast and easy to scan. */
+.premium-card:not(:has(.dl-tile)) .p-label {
+  display: block;
+  margin-bottom: .42rem;
+  color: #4b574e !important;
+  font-size: .7rem !important;
+  font-weight: 800 !important;
+  letter-spacing: .035em;
+}
+.premium-card:not(:has(.dl-tile)) .p-input {
+  background: var(--surface-soft) !important;
+  border: 1px solid #d7dfd5 !important;
+  border-radius: 7px !important;
+  box-shadow: none !important;
+  color: var(--ink) !important;
+  font-size: .875rem !important;
+  font-weight: 550 !important;
+  padding: .73rem .82rem !important;
+}
+.premium-card:not(:has(.dl-tile)) .p-input:hover { background: #fff !important; border-color: #bac8b9 !important; }
+.premium-card:not(:has(.dl-tile)) .p-input:focus {
+  background: #fff !important;
+  border-color: var(--forest) !important;
+  box-shadow: 0 0 0 3px rgba(40, 85, 58, .13) !important;
+}
+.premium-card:not(:has(.dl-tile)) .p-input::placeholder { color: #97a298 !important; font-weight: 450 !important; }
+.premium-card:not(:has(.dl-tile)) .p-btn-emerald,
+.premium-card:not(:has(.dl-tile)) .p-btn-blue,
+.premium-card:not(:has(.dl-tile)) .p-btn-secondary {
+  border-radius: 7px !important;
+  box-shadow: none !important;
+  font-weight: 750 !important;
+  transition: background .16s ease, border-color .16s ease, color .16s ease !important;
+}
+.premium-card:not(:has(.dl-tile)) .p-btn-emerald { background: var(--forest) !important; border-color: var(--forest) !important; }
+.premium-card:not(:has(.dl-tile)) .p-btn-emerald:hover:not(:disabled) { background: var(--forest-deep) !important; transform: none !important; box-shadow: none !important; }
+.premium-card:not(:has(.dl-tile)) .p-btn-blue { background: #46667c !important; border-color: #46667c !important; }
+.premium-card:not(:has(.dl-tile)) .p-btn-secondary { background: #fff !important; border-color: #d2ddd1 !important; color: #465248 !important; }
+.premium-card:not(:has(.dl-tile)) .p-btn-secondary:hover:not(:disabled) { background: var(--forest-soft) !important; border-color: #b9c9b8 !important; transform: none !important; }
+
+/* Autofill and image sections read as purposeful supporting tools, not alerts. */
+.premium-card:has(input[accept="application/pdf"]) > .relative:has(input[accept="application/pdf"]) {
+  border: 1px dashed #9caf9c !important;
+  border-radius: 10px !important;
+  background: linear-gradient(100deg, #f5f8f3, #edf4ec) !important;
+}
+.premium-card:has(input[accept="application/pdf"]) > .relative:has(input[accept="application/pdf"]) .w-12 {
+  background: var(--forest) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+.premium-card:not(:has(.dl-tile)) .bg-slate-50 { background: #f7f9f6 !important; }
+.premium-card:not(:has(.dl-tile)) .bg-slate-100 { background: #eef2ed !important; }
+.premium-card:not(:has(.dl-tile)) .bg-emerald-50 { background: var(--forest-soft) !important; }
+.premium-card:not(:has(.dl-tile)) .border-slate-200,
+.premium-card:not(:has(.dl-tile)) .border-slate-200\/80 { border-color: var(--line) !important; }
+.premium-card:not(:has(.dl-tile)) .text-emerald-800,
+.premium-card:not(:has(.dl-tile)) .text-emerald-700,
+.premium-card:not(:has(.dl-tile)) .text-emerald-600 { color: var(--forest) !important; }
+.premium-card:not(:has(.dl-tile)) .rounded-2xl { border-radius: 10px !important; }
+.premium-card:not(:has(.dl-tile)) .rounded-xl { border-radius: 8px !important; }
+
+/* Proofing panel */
+main.no-print .lg\:col-span-5 > .premium-card {
+  background: #fbfcfa !important;
+  border-color: #d8e1d7 !important;
+  box-shadow: 0 16px 36px rgba(25, 43, 30, .06) !important;
+}
+main.no-print .lg\:col-span-5 > .premium-card > div:first-child h3 { color: var(--ink) !important; letter-spacing: -.02em; }
+#card-preview-zone { padding: .9rem 0 1.25rem !important; }
+main.no-print .lg\:col-span-5 .bg-slate-100 { background: #e8ede8 !important; }
+main.no-print .lg\:col-span-5 .bg-emerald-500 { background: var(--forest) !important; }
+
+/* Card download hub is intentionally excluded from visual overrides. */
+
+footer.no-print {
+  background: rgba(255, 255, 255, .82) !important;
+  border-color: var(--line) !important;
+}
+footer.no-print .text-emerald-600 { color: var(--forest) !important; }
+
+@media (max-width: 1023px) {
+  main.no-print { padding-top: 1.35rem !important; gap: 1.25rem !important; }
+  header.no-print > div { height: auto !important; min-height: 68px; padding-top: .7rem; padding-bottom: .7rem; }
+  .no-print.bg-white.border-b { top: 68px !important; }
+}
+@media (max-width: 640px) {
+  body::before { background-size: auto, 38px 38px, 38px 38px; }
+  header.no-print p, header.no-print h1 + span { display: none !important; }
+  header.no-print select { max-width: 112px; }
+  main.no-print { padding-left: 1rem !important; padding-right: 1rem !important; }
+  .premium-card:not(:has(.dl-tile)) { border-radius: 10px !important; }
+  .premium-card:not(:has(.dl-tile)).p-6, .premium-card:not(:has(.dl-tile)).p-8 { padding: 1.2rem !important; }
+  .no-print.bg-white.border-b > div > button { min-width: 135px !important; }
+}

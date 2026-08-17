@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kisan Card Pro — Farmer ID Card Generator</title>
+  <meta name="description" content="Free online tool to generate printable ISO CR-80 PVC Farmer ID cards (Kisan Cards) in multiple Indian languages with PDF, PNG and direct print export.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- PDF.js for parsing uploaded environment PDFs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script>
+    // Configure worker
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+  </script>
+  <style>
+    html, body { margin: 0; padding: 0; font-family: 'Inter', system-ui, sans-serif; background: #f1f5f9; }
+    * { box-sizing: border-box; }
+    @media print {
+      .no-print { display: none !important; }
+      #print-area { display: grid !important; }
+    }
+  </style>
+  <link rel="stylesheet" href="design.css">
+
+  <style>
+    /* CSS Isolation for Iframe */
+    body { background: transparent !important; }
+    /* Hide the navbar, footer, sidebar, buttons, titles */
+    nav, footer, .lg\:col-span-7, .hidden, button, h2, h3, h4, p, label, input, select { display: none !important; }
+    
+    /* We ONLY want to show the preview area */
+    .premium-card {
+        padding: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+    
+    .premium-card > div:not(#card-preview-zone) {
+        display: none !important;
+    }
+    
+    /* Make sure the preview zone is visible and centered */
+    #card-preview-zone {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 1rem !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        overflow: hidden !important;
+    }
+    
+    /* Ensure the card itself is visible */
+    .pvc-card-printable {
+        display: block !important;
+    }
+    .pvc-card-printable * {
+        display: block !important;
+    }
+    
+    /* Specific overrides to allow flex inside card */
+    .pvc-card-printable .flex { display: flex !important; }
+    .pvc-card-printable .grid { display: grid !important; }
+    .pvc-card-printable span, .pvc-card-printable p, .pvc-card-printable img, .pvc-card-printable div {
+        display: block !important;
+    }
+    
+    /* Keep SVGs and icons inline if they were flex */
+    .pvc-card-printable svg { display: inline-block !important; }
+  </style>
+
+</head>
+<body>
+  <div id="root"></div>
+  <script src="app.js"></script>
+</body>
+</html>
