@@ -65,6 +65,17 @@ export default function ReviewScreen({ extractedData, onConfirm, onBack }) {
       }
     }));
   };
+
+  const handlePhotoUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setData(prev => ({ ...prev, photo: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   
   const getFieldStatus = (val) => {
     if (val === null || val === undefined || val === '' || val === 'Not found') return 'missing';
@@ -86,7 +97,26 @@ export default function ReviewScreen({ extractedData, onConfirm, onBack }) {
 
       <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
         <div className="px-6 py-4 bg-slate-50 border-b border-slate-200">
-          <h2 className="font-semibold text-slate-800 text-sm">Personal Information</h2>
+          <h2 className="font-semibold text-slate-800 text-sm">Personal Information & Photo</h2>
+        </div>
+        <div className="px-6 py-6 border-b border-slate-100 flex items-center gap-6">
+          {data.photo ? (
+            <div className="relative w-24 h-32 rounded-xl overflow-hidden border border-slate-200 shadow-sm shrink-0">
+              <img src={data.photo} alt="Farmer" className="w-full h-full object-cover" />
+            </div>
+          ) : (
+            <div className="w-24 h-32 rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 flex items-center justify-center text-slate-400 shrink-0">
+              <span className="text-[10px] uppercase font-bold text-center px-2">No Photo</span>
+            </div>
+          )}
+          <div>
+            <h3 className="text-sm font-semibold text-slate-900">Farmer Photograph</h3>
+            <p className="text-xs text-slate-500 mt-1 mb-3">A clear photograph is required for the final PVC card.</p>
+            <input type="file" accept="image/*" id="review-photo-upload" className="hidden" onChange={handlePhotoUpload} />
+            <label htmlFor="review-photo-upload" className="cursor-pointer px-4 py-2 bg-white border border-slate-200 hover:border-emerald-500 rounded-lg text-xs font-bold text-slate-700 shadow-sm transition-all inline-block">
+              {data.photo ? 'Change Photo' : 'Upload Photo'}
+            </label>
+          </div>
         </div>
         <div className="px-6 py-2">
           <FieldRow label="Farmer Name (English)" value={data.farmer.nameEng} status={getFieldStatus(data.farmer.nameEng)} onChange={(v) => handleChange('farmer', 'nameEng', v)} />

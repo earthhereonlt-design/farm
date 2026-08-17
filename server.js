@@ -39,8 +39,8 @@ app.post('/api/extract', upload.single('document'), async (req, res) => {
 
     const fileMimeType = req.file.mimetype;
     
-    // We will use gemini-3.1-pro for high accuracy extraction as requested
-    const model = 'gemini-3.1-pro';
+    // Fallback to gemini-2.5-flash which is widely available and fast
+    const model = 'gemini-2.5-flash';
 
     // Convert multer buffer to base64 for Gemini
     const filePart = {

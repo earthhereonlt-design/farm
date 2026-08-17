@@ -14,6 +14,17 @@ export default function ManualForm({ onConfirm, onBack }) {
     }));
   };
 
+  const handlePhotoUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setData(prev => ({ ...prev, photo: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleLandChange = (index, field, value) => {
     setData(prev => {
       const newLand = [...prev.landRecords];
@@ -48,9 +59,30 @@ export default function ManualForm({ onConfirm, onBack }) {
         {/* Farmer Information */}
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
           <div className="px-6 py-4 bg-slate-50 border-b border-slate-200">
-            <h2 className="font-semibold text-slate-800 text-sm">Farmer Information</h2>
+            <h2 className="font-semibold text-slate-800 text-sm">Farmer Information & Photo</h2>
           </div>
           <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="md:col-span-2">
+              <label className="block text-xs font-semibold text-slate-600 mb-1.5">Farmer Photograph</label>
+              <div className="flex items-center gap-4">
+                {data.photo ? (
+                  <div className="relative w-20 h-24 rounded-lg overflow-hidden border border-slate-200 shadow-sm">
+                    <img src={data.photo} alt="Farmer" className="w-full h-full object-cover" />
+                  </div>
+                ) : (
+                  <div className="w-20 h-24 rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 flex items-center justify-center text-slate-400">
+                    <span className="text-[10px] uppercase font-bold text-center px-2">No Photo</span>
+                  </div>
+                )}
+                <div>
+                  <input type="file" accept="image/*" id="photo-upload" className="hidden" onChange={handlePhotoUpload} />
+                  <label htmlFor="photo-upload" className="cursor-pointer px-4 py-2 bg-white border border-slate-200 hover:border-emerald-500 rounded-lg text-sm font-medium text-slate-700 shadow-sm transition-all inline-block">
+                    {data.photo ? 'Change Photo' : 'Upload Photo'}
+                  </label>
+                  <p className="text-xs text-slate-400 mt-1.5">Required for the ID Card.</p>
+                </div>
+              </div>
+            </div>
             <div>
               <label className="block text-xs font-semibold text-slate-600 mb-1.5">Enrollment Number / Farmer ID</label>
               <input type="text" value={data.farmer.farmerId} onChange={e => handleChange('farmer', 'farmerId', e.target.value)} className="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-emerald-500" placeholder="e.g. UP123456" />
