@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { UploadCloud, FileText, Loader2, AlertTriangle } from 'lucide-react';
 
-export default function AutoExtract({ onExtracted, onBack }) {
+export default function AutoExtract({ onExtracted, onBack, onFail }) {
   const [isDragging, setIsDragging] = useState(false);
   const [file, setFile] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -60,7 +60,8 @@ export default function AutoExtract({ onExtracted, onBack }) {
       onExtracted(data);
     } catch (err) {
       console.error(err);
-      setError(err.message || "An unexpected error occurred during extraction.");
+      alert("Auto Extraction Failed: " + (err.message || "An unexpected error occurred.") + "\nSwitching to Manual Mode.");
+      if (onFail) onFail();
     } finally {
       setIsProcessing(false);
     }

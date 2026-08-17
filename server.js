@@ -63,7 +63,7 @@ The JSON structure must exactly match:
     "nameLocal": "Farmer name in Hindi/local language",
     "gender": "Gender",
     "casteCategory": "Caste category",
-    "dob": "Date of birth (DD/MM/YYYY)",
+    "dob": "Date of birth (Must be exactly DD/MM/YYYY format with 4-digit year. e.g., if document has 01/01/90, output 01/01/1990)",
     "age": "Age",
     "aadhaar": "Aadhaar number (keep masked if masked)",
     "identifierNameEng": "Father/Husband name in English",

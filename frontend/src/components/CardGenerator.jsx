@@ -32,10 +32,22 @@ export default function CardGenerator({ confirmedData, onReset, onEdit }) {
         ]
       };
 
-      iframeRef.current.contentWindow.postMessage({
-        type: 'SET_FARMER',
-        payload: legacyData
-      }, '*');
+      const send = () => {
+        if (iframeRef.current && iframeRef.current.contentWindow) {
+          iframeRef.current.contentWindow.postMessage({
+            type: 'SET_FARMER',
+            payload: legacyData
+          }, '*');
+        }
+      };
+
+      send();
+      // The legacy iframe React bundle can be slow to mount. 
+      // Send multiple times to ensure it syncs up, fixing the intermittent missing photo bug.
+      const syncIntervals = [500, 1000, 2500, 4000, 6000];
+      const timers = syncIntervals.map(time => setTimeout(send, time));
+      
+      return () => timers.forEach(clearTimeout);
     }
   }, [iframeReady, confirmedData]);
 

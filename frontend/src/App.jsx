@@ -82,7 +82,7 @@ function App() {
         )}
 
         {step === 'auto' && (
-          <AutoExtract onExtracted={handleExtractionSuccess} onBack={() => setStep('onboarding')} />
+          <AutoExtract onExtracted={handleExtractionSuccess} onBack={() => setStep('onboarding')} onFail={() => setStep('manual')} />
         )}
 
         {step === 'manual' && (
