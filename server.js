@@ -39,8 +39,8 @@ app.post('/api/extract', upload.single('document'), async (req, res) => {
 
     const fileMimeType = req.file.mimetype;
     
-    // Fallback to gemini-2.5-flash which is widely available and fast
-    const model = 'gemini-2.5-flash';
+    // Use gemini-3.6-flash as older models are deprecated for new users in 2026
+    const model = 'gemini-3.6-flash';
 
     // Convert multer buffer to base64 for Gemini
     const filePart = {

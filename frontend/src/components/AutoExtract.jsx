@@ -52,7 +52,8 @@ export default function AutoExtract({ onExtracted, onBack }) {
 
       if (!response.ok) {
         const errData = await response.json();
-        throw new Error(errData.error || 'Failed to process document');
+        const errorMessage = errData.details ? `${errData.error} (${errData.details})` : errData.error;
+        throw new Error(errorMessage || 'Failed to process document');
       }
 
       const data = await response.json();
