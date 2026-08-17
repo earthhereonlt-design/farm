@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { emptyFarmerData } from '../models';
 
-export default function ManualForm({ onConfirm, onBack }) {
-  const [data, setData] = useState(emptyFarmerData);
+export default function ManualForm({ initialData, onConfirm, onBack }) {
+  const [data, setData] = useState(initialData || emptyFarmerData);
 
   const handleChange = (section, field, value) => {
     setData(prev => ({

@@ -86,15 +86,19 @@ function App() {
         )}
 
         {step === 'manual' && (
-          <ManualForm onConfirm={handleReviewConfirm} onBack={() => setStep('onboarding')} />
+          <ManualForm initialData={confirmedData} onConfirm={handleReviewConfirm} onBack={() => setStep('onboarding')} />
         )}
 
         {step === 'review' && extractedData && (
-          <ReviewScreen extractedData={extractedData} onConfirm={handleReviewConfirm} onBack={() => setStep('auto')} />
+          <ReviewScreen extractedData={confirmedData || extractedData} onConfirm={handleReviewConfirm} onBack={() => setStep('auto')} />
         )}
 
         {step === 'generate' && confirmedData && (
-          <CardGenerator confirmedData={confirmedData} onReset={resetFlow} />
+          <CardGenerator 
+            confirmedData={confirmedData} 
+            onReset={resetFlow} 
+            onEdit={() => setStep(extractedData ? 'review' : 'manual')} 
+          />
         )}
       </main>
     </div>

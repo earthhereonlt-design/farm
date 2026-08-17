@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Download, CheckCircle2 } from 'lucide-react';
 
-export default function CardGenerator({ confirmedData, onReset }) {
+export default function CardGenerator({ confirmedData, onReset, onEdit }) {
   const iframeRef = useRef(null);
   const [iframeReady, setIframeReady] = useState(false);
 
@@ -56,14 +56,6 @@ export default function CardGenerator({ confirmedData, onReset }) {
       }, '*');
     }
   };
-  
-  const handlePrint = () => {
-    if (iframeRef.current) {
-      iframeRef.current.contentWindow.postMessage({
-        type: 'PRINT_CARD'
-      }, '*');
-    }
-  };
 
   return (
     <div className="w-full max-w-6xl mx-auto py-8 px-4">
@@ -72,12 +64,20 @@ export default function CardGenerator({ confirmedData, onReset }) {
           <h1 className="text-2xl font-bold text-slate-900">Your AgriCard is Ready</h1>
           <p className="text-slate-500 mt-1">Review the preview below and select your export format.</p>
         </div>
-        <button 
-          onClick={onReset}
-          className="text-sm font-medium text-slate-500 hover:text-slate-800 transition-colors"
-        >
-          Start Over
-        </button>
+        <div className="flex items-center gap-4">
+          <button 
+            onClick={onEdit}
+            className="text-sm font-medium text-emerald-600 hover:text-emerald-700 transition-colors"
+          >
+            Go Back & Edit
+          </button>
+          <button 
+            onClick={onReset}
+            className="text-sm font-medium text-slate-500 hover:text-slate-800 transition-colors"
+          >
+            Start Over
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -120,13 +120,6 @@ export default function CardGenerator({ confirmedData, onReset }) {
               >
                 <Download className="w-4 h-4" />
                 Download 4×6 Photo PDF
-              </button>
-              
-              <button 
-                onClick={handlePrint}
-                className="w-full flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 py-3 px-4 rounded-xl font-medium transition-colors"
-              >
-                Direct Print PVC
               </button>
             </div>
             
